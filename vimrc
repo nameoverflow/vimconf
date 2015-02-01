@@ -18,7 +18,24 @@ endfunction
 
 " vim-powerline
 let g:Powerline_symbols = 'unicode'
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplMoreThanOne=0
 
+let g:NERDTree_title="[NERDTree]"
+let g:winManagerWindowLayout="NERDTree|TagList"
+
+function! NERDTree_Start()
+    exec 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
+
+nmap wm :WMToggle<CR>
 """"""""""""""""""""""""""""""""""""""
 " common settings
 """"""""""""""""""""""""""""""""""""""
@@ -53,6 +70,9 @@ set nu!
 set guifont=monofur\ 12
 set guioptions-=M
 set guioptions-=T
+set guioptions-=L
+set guioptions-=r
+set guioptions-=b
 """""""""""""""""""""""""""""""""""""""
 " file settings
 """""""""""""""""""""""""""""""""""""""
@@ -145,7 +165,10 @@ exec "!g++ % -o %<"
 exec "! ./%<"
 endfunc
 
-
+"""""""""""""""""""""""""""""""""""""""""""""
+" Map settings
+"""""""""""""""""""""""""""""""""""""""""""""
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
@@ -170,17 +193,22 @@ Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
-Plugin 'user/L9', {'name': 'newL9'}
 " Support to css3
 Bundle "lepture/vim-css"
-
+" NerdTree
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+" MiniBufexpl
+Bundle 'https://github.com/fholgado/minibufexpl.vim.git'
+" WinManager
+Bundle 'https://github.com/vim-scripts/winmanager.git'
 " Power line plugin
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+" Syntax file for JavaScript libraries
+Plugin 'https://github.com/othree/javascript-libraries-syntax.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
